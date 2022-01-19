@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-describe('Example', () => {
+describe('Home screen', () => {
   beforeAll(async () => {
     await device.launchApp();
   });
@@ -12,13 +12,17 @@ describe('Example', () => {
     await expect(element(by.id('welcome'))).toBeVisible();
   });
 
-  it('should show hello screen after tap', async () => {
-    await element(by.id('hello_button')).tap();
-    await expect(element(by.text('Hello!!!'))).toBeVisible();
-  });
+  it('check register of new skill', async () => {
+    const newSkillInput = await element(by.id('newSkill-input'));
+    const buttonAdd = await element(by.id('button-add'));
+    const flatListSkills = await element(by.id('flatList-skills'));
 
-  it('should show world screen after tap', async () => {
-    await element(by.id('world_button')).tap();
-    await expect(element(by.text('World!!!'))).toBeVisible();
+    await newSkillInput.tap();
+    await newSkillInput.typeText('React Native');
+    await buttonAdd.tap();
+
+    await flatListSkills.tap();
+
+    expect(element(by.id('flatList-skills'))).toBeVisible();
   });
 });
